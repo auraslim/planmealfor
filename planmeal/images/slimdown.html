@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Cecelia·168 Plan</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #fbebdb;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            padding: 1rem 0.8rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            background: #fffcf5;
+            border-radius: 2.8rem 2.8rem 2.4rem 2.4rem;
+            padding: 1.8rem 1.5rem 2rem 1.5rem;
+            box-shadow: 0 20px 35px -15px #dbb58b;
+            border: 2px solid #ffdec2;
+        }
+
+        /* 主标题 —— 纯文字，无任何背景框 */
+        .main-headline {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: #ac531e;
+            margin-bottom: 1rem;
+            letter-spacing: -0.3px;
+            background: transparent;
+            padding: 0;
+            border: none;
+            display: block;
+            box-shadow: none;
+        }
+        .main-headline strong {
+            font-weight: 800;
+            background: transparent;
+            padding: 0;
+            border-radius: 0;
+            color: #ac531e;
+            display: inline;
+            border: none;
+            box-shadow: none;
+        }
+
+        /* 数据条 */
+        .stats-banner {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.8rem 1.5rem;
+            background: #feead5;
+            padding: 0.9rem 1.5rem;
+            border-radius: 40px;
+            margin: 0.8rem 0 1.8rem 0;
+            font-weight: 600;
+            color: #694326;
+            font-size: 0.95rem;
+            border: none;
+            box-shadow: 0 2px 6px rgba(235, 155, 85, 0.1);
+        }
+
+        .stat-cholesterol {
+            background: #ffdbdb;
+            color: #b14040;
+            padding: 0.2rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            border: none;
+        }
+        .stat-visceral {
+            background: #dae6ff;
+            color: #2f5f87;
+            padding: 0.2rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            border: none;
+        }
+
+        /* 两栏横排 (早餐午餐) */
+        .meal-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1rem 0 0.5rem;
+        }
+
+        /* 早餐/午餐 各自的外框 —— 浅色方框 */
+        .meal-section {
+            flex: 1 1 280px;
+            background: #fffaf2;
+            border-radius: 2.2rem;
+            padding: 1.5rem 1.3rem 1.8rem 1.3rem;
+            border: 2px solid #fbc99d;
+            box-shadow: 0 6px 0 #eebe92;
+        }
+
+        /* Tea Time 区域 —— 独立全宽框 */
+        .tea-time-section {
+            width: 100%;
+            background: #fffaf2;
+            border-radius: 2.2rem;
+            padding: 1.8rem 1.5rem 2rem 1.5rem;
+            border: 2px solid #fbc99d;
+            box-shadow: 0 6px 0 #eebe92;
+            margin-top: 2rem;
+        }
+
+        /* 区域内部标题 */
+        .section-header {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #bd5f27;
+            border-bottom: 4px dotted #f8bc7c;
+            padding-bottom: 0.25rem;
+            margin-bottom: 1.4rem;
+            display: inline-block;
+            background: none;
+            border-top: 0;
+            border-left: 0;
+            border-right: 0;
+        }
+
+        .tea-time-header {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #bd5f27;
+            border-bottom: 4px dotted #f8bc7c;
+            padding-bottom: 0.25rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        /* 内部所有选项组无框线 */
+        .option-group {
+            margin-bottom: 1.8rem;
+        }
+
+        /* 小标题样式 (带半透明底色) */
+        .sub-title {
+            font-weight: 800;
+            font-size: 1.08rem;
+            color: #9e481b;
+            background: #ffebd2;
+            padding: 0.2rem 1rem 0.2rem 1rem;
+            border-radius: 30px;
+            display: inline-block;
+            margin: 0.3rem 0 0.5rem 0;
+            border: none;
+            box-shadow: none;
+        }
+
+        /* 餐点名称样式 - 配合emoji使用 */
+        .menu-item-title {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #9c4c1f;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .menu-item-emoji {
+            font-size: 1.4rem;
+            line-height: 1;
+        }
+        
+        .menu-item-name {
+            font-weight: 800;
+            color: #9c4c1f;
+        }
+
+        /* 警示标题 (Not Recommended) */
+        .warning-title {
+            font-weight: 800;
+            font-size: 1.15rem;
+            color: #b13e3e;
+            background: #ffe2e2;
+            padding: 0.2rem 1rem 0.2rem 1rem;
+            border-radius: 30px;
+            display: inline-block;
+            margin: 0.8rem 0 0.5rem 0;
+            border: none;
+        }
+
+        /* 食物行 / 提示行 */
+        .food-line {
+            display: flex;
+            align-items: baseline;
+            gap: 0.6rem;
+            margin-bottom: 0.4rem;
+            font-size: 1.02rem;
+            color: #2f2f2f;
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+
+        .food-emoji {
+            font-size: 1.3rem;
+            min-width: 2rem;
+            text-align: center;
+        }
+
+        .food-desc {
+            font-weight: 500;
+        }
+
+        .food-desc strong, .food-desc b {
+            font-weight: 700;
+            color: #b14f1a;
+        }
+
+        /* Tea Time 卡片网格 - 图片区域专门留空给JPG */
+        .tea-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .tea-card {
+            display: flex;
+            gap: 1rem;
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1rem;
+            border: 1px solid #ffd9b5;
+            box-shadow: 0 4px 8px rgba(251, 176, 94, 0.15);
+            align-items: center;
+        }
+
+        /* 图片容器 - 方便您后续替换为JPG */
+        .tea-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 1.2rem;
+            background: #fff2e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            border: 2px solid #ffd4a9;
+            flex-shrink: 0;
+            overflow: hidden; /* 确保替换成图片后不会溢出 */
+        }
+        
+        /* 等您把🥣替换成<img src="yogurt.jpg">后，图片会自动适应这个圆形框 */
+        .tea-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 1.2rem;
+        }
+
+        .tea-content {
+            flex: 1;
+        }
+
+        .tea-title {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #9c4c1f;
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .tea-desc {
+            font-size: 0.98rem;
+            color: #3d3d3d;
+            margin-bottom: 0.2rem;
+        }
+
+        .tea-note {
+            font-weight: 600;
+            color: #2b7d4b;
+            background: #dcf5e4;
+            padding: 0.15rem 0.7rem;
+            border-radius: 30px;
+            display: inline-block;
+            font-size: 0.85rem;
+            border: none;
+            margin-top: 0.2rem;
+        }
+
+        /* 底部 */
+        .footer-calm {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #a15828;
+            background: #ffeedd;
+            padding: 0.6rem 1.5rem;
+            border-radius: 60px;
+            border: none;
+            letter-spacing: -0.1px;
+        }
+
+        @media (max-width: 500px) {
+            .container { padding: 1.2rem 1rem; }
+            .main-headline { font-size: 1.8rem; }
+            .section-header { font-size: 1.8rem; }
+            .meal-section { padding: 1.2rem 1rem; }
+            .tea-time-section { padding: 1.2rem 1rem; }
+            .tea-card { flex-direction: column; text-align: center; }
+            .tea-image { width: 100%; height: auto; aspect-ratio: 1/1; max-width: 120px; margin: 0 auto; }
+        }
+
+        /* 确保内部无额外边框 */
+        .option-group, .food-line, .menu-item-title, .warning-title, .sub-title {
+            box-shadow: none;
+            border: none;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 主标题 纯文字无框 -->
+    <div class="main-headline">
+        <strong>Cecelia 168 Diet Plan (No Dinner)</strong>
+    </div>
+
+    <!-- 数据标注 -->
+    <div class="stats-banner">
+        <span>👉🏻 80kg, 162cm</span>
+        <span>👉🏻 PBF 44%, BMR 1343kcal</span>
+        <span class="stat-cholesterol">📌 Cholesterol</span>
+        <span class="stat-visceral">🫀 Visceral Fat</span>
+    </div>
+
+    <!-- 双栏：左边 The Coffee Bean，右边 O'Briens -->
+    <div class="meal-row">
+        <!-- 早餐区域：The Coffee Bean -->
+        <div class="meal-section">
+            <div class="section-header">The Coffee Bean</div>
+
+            <!-- Break O' Day -->
+            <div class="option-group">
+                <div class="menu-item-title">
+                    <span class="menu-item-emoji">🍳</span>
+                    <span class="menu-item-name">Break O' Day</span>
+                </div>
+                <div class="food-line"><span class="food-emoji">✅</span><span class="food-desc"><strong>No butter</strong></span></div>
+                <div class="food-line"><span class="food-emoji">✅</span><span class="food-desc"><strong>No jam</strong></span></div>
+            </div>
+
+            <!-- Food for Thought -->
+            <div class="option-group">
+                <div class="menu-item-title">
+                    <span class="menu-item-emoji">🍞</span>
+                    <span class="menu-item-name">Food for Thought</span>
+                </div>
+            </div>
+
+            <!-- Shrimp Cracker Salad -->
+            <div class="option-group">
+                <div class="menu-item-title">
+                    <span class="menu-item-emoji">🦐</span>
+                    <span class="menu-item-name">Shrimp Cracker Salad</span>
+                </div>
+                <div class="food-line"><span class="food-emoji">✅</span><span class="food-desc"><strong>Less salad sauce</strong></span></div>
+            </div>
+
+            <!-- Breakfast Bagel -->
+            <div class="option-group">
+                <div class="menu-item-title">
+                    <span class="menu-item-emoji">🥯</span>
+                    <span class="menu-item-name">Breakfast Bagel</span>
+                </div>
+                <div class="food-line"><span class="food-emoji">✅</span><span class="food-desc"><strong>Try to avoid cheese slice</strong></span></div>
+                <div class="food-line"><span class="food-emoji">✅</span><span class="food-desc"><strong>Less sauce</strong></span></div>
+            </div>
+
+            <!-- ⚠️ Not Recommended 部分 -->
+            <div class="option-group">
+                <div class="warning-title">⚠️ Not Recommended</div>
+                <div class="food-line"><span class="food-emoji">🙅🏻‍♀️</span><span class="food-desc"><strong>Chicken & Cheese Toastie</strong></span></div>
+                <div class="food-line"><span class="food-emoji">🙅🏻‍♀️</span><span class="food-desc"><strong>Spicy Tuna Sandwich</strong></span></div>
+                <div class="food-line"><span class="food-emoji">🙅🏻‍♀️</span><span class="food-desc"><strong>Roasted Chicken & Sun-Dried Tomato Bagel Sandwich</strong></span></div>
+            </div>
+        </div>
+
+        <!-- 午餐区域：O'Briens -->
+        <div class="meal-section">
+            <div class="section-header">O'Briens</div>
+
+            <!-- 全局 Less salad sauce -->
+            <div class="food-line" style="margin-bottom:0.8rem;"><span class="food-emoji">✅</span><span class="food-desc"><strong>Less salad sauce</strong></span></div>
+
+            <!-- Classic Chicken Caesar Salad -->
+            <div class="option-group">
+                <div class="menu-item-title">
+                    <span class="menu-item-emoji">🥗</span>
+                    <span class="menu-item-name">Classic Chicken Caesar Salad</span>
+                </div>
+            </div>
+
+            <!-- Nicoise Salad -->
+            <div class="option-group">
+                <div class="menu-item-title">
+                    <span class="menu-item-emoji">🥑</span>
+                    <span class="menu-item-name">Nicoise Salad</span>
+                </div>
+            </div>
+
+            <!-- Classic Caesar Chicken Wrap -->
+            <div class="option-group">
+                <div class="menu-item-title">
+                    <span class="menu-item-emoji">🌯</span>
+                    <span class="menu-item-name">Classic Caesar Chicken Wrap</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tea Time 区域 (预留图片位置，方便您替换为JPG) -->
+    <div class="tea-time-section">
+        <div class="tea-time-header">☕ Tea Time</div>
+        
+        <div class="tea-grid">
+            <!-- 1. Yogurt - 图片区域用🥣占位，方便您替换成<img src="images/yogurt.jpg"> -->
+            <div class="tea-card">
+                <div class="tea-image">
+    <img src="images/yogurt.jpeg" alt="Yogurt" style="width:100%; height:100%; object-fit:cover; border-radius:1.2rem;">
+</div>
+                <div class="tea-content">
+                    <div class="tea-title">1. Yogurt</div>
+                    <div class="tea-desc"><strong>🥣 Plain Yogurt</strong></div>
+                    <div class="tea-desc"><strong>🥣 Greek Yogurt (High-Protein)</strong></div>
+                    <span class="tea-note">✅ Avoid Full Cream / Flavoured Yogurt</span>
+                </div>
+            </div>
+
+            <!-- 2. Real Foods Rice Thins (Wholegrain) - 图片区域用🫓占位 -->
+            <div class="tea-card">
+                <div class="tea-image">
+    <img src="images/rice-thins.jpeg" alt="rice-thins" style="width:100%; height:100%; object-fit:cover; border-radius:1.2rem;">
+</div>
+                <div class="tea-content">
+                    <div class="tea-title">3. Real Foods Rice Thins (Wholegrain)</div>
+                    <div class="tea-desc"><strong>🫓 Eat 3 pieces (74 kcal)</strong></div>
+                </div>
+            </div>
+
+            <!-- 3. Munchy's Oat Krunch - 图片区域用🍪占位 -->
+            <div class="tea-card">
+                <div class="tea-image">
+    <img src="images/munchys.jpg" alt="Munchys" style="width:100%; height:100%; object-fit:cover; border-radius:1.2rem;">
+</div>
+                <div class="tea-content">
+                    <div class="tea-title">4. Munchy's Oat Krunch</div>
+                    <div class="tea-desc"><strong>(Chia Seeds & Milk)</strong></div>
+                    <div class="tea-desc"><strong>🍪 1 small packet<strong></div>
+                </div>
+            </div>
+
+            <!-- 4. Sanwa Soda Cracker - 图片区域用🍪占位 -->
+            <div class="tea-card">
+                <div class="tea-image">
+    <img src="images/sanwa.jpg" alt="Sanwa" style="width:100%; height:100%; object-fit:cover; border-radius:1.2rem;">
+</div>
+                <div class="tea-content">
+                    <div class="tea-title">5. Sanwa Soda Cracker</div>
+                    <div class="tea-desc"><strong>🍪 1 small packet<strong></div>
+                </div>
+            </div>
+
+            <!-- 5. Almonds / Walnuts / Pistachios - 图片区域用🌰占位 -->
+            <div class="tea-card">
+                <div class="tea-image">
+    <img src="images/nuts.jpeg" alt="Nuts" style="width:100%; height:100%; object-fit:cover; border-radius:1.2rem;">
+</div>
+                <div class="tea-content">
+                    <div class="tea-title">5. Almonds / Walnuts / Pistachios</div>
+                    <div class="tea-desc"><strong>Selectable if ingredients meet the following criteria</strong></div>
+                    <span class="tea-note">✅ No added sugar · Raw or dry-roasted · Unsalted</span>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部简洁提醒 -->
+    <div class="footer-calm">
+        ⚡ no dinner · 168 plan ⚡
+    </div>
+</div>
+</body>
+</html>
